@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Manufacturer', {
+    let manufacturer = sequelize.define('Manufacturer', {
         Manufacturer_ID: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -7,5 +7,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         Manufacturer_Name: DataTypes.STRING,
         Manufacturer_Logo_Path: DataTypes.STRING
-    })
+    });
+    return manufacturer;
 };

@@ -11,9 +11,9 @@ module.exports = (sequelize, DataTypes) => {
         Password: DataTypes.STRING
     });
     Admin.beforeCreate((admin, options) => {
-        admin.Password = generatePassword(admin.Password);
+        admin.Password = this.generatePassword(admin.Password);
     });
-    let generatePassword = function(password) {
+    Admin.generatePassword = function(password) {
         return  bcrypt.hashSync(password, bcrypt.genSaltSync(5), null, function (err, hash) {
             console.log('Password creation process was done')
         });

@@ -16,6 +16,10 @@ resourcesRouter.use('/:table/:page', function(request, response) {
         adminPanelController.returnAdminPanelCategoryEntities(request, response, pageNumber);
     else if (tableName === 'manufacturer')
         adminPanelController.returnAdminPanelManufacturerEntities(request, response, pageNumber);
+    else if (tableName === 'generalproduct')
+        adminPanelController.returnAdminPanelGeneralProductsEntities(request, response, pageNumber);
+    else if (tableName === 'subproduct')
+        adminPanelController.returnAdminPanelSubProductEntities(request, response, pageNumber);
 });
 
 module.exports = resourcesRouter;

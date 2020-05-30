@@ -1,0 +1,42 @@
+<div class="container p-3 d-flex flex-column">
+    <h2>Sub products</h2>
+    <div class="d-flex py-2 align-items-center">
+        <a href="/admin/panel/resources/subproduct/{pageNumber}" role="button" class="btn btn-outline-dark mx-2">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <h3 class="d-inline-block">
+            Edit sub product
+        </h3>
+    </div>
+    <form class="white-background p-4" method="post">
+        <div class="form-group">
+            <label for="currentGeneralProductInput">Current general product</label>
+            <input type="text" id="currentGeneralProductInput" name="currentCategory" class="form-control" value="{currentGeneralProduct}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="generalProductSelectInput">General product</label>
+            <input  class="form-control" list="generalProductOptions" id="generalProductSelectInput" placeholder="Enter general product name">
+            <datalist id="generalProductOptions">
+                {generalproductoptions}
+            </datalist>
+        </div>
+        <div class="form-group">
+            <label for="subProductCodeInput">Sub product code</label>
+            <input type="text" id="subProductCodeInput" name="subProductCodeInput" class="form-control" placeholder="Enter sub product code" value="{subproductcode}">
+        </div>
+        <div class="form-group">
+            <label for="subProductPriceInput">Price</label>
+            <input type="number" step="0.01" min="0" id="subProductPriceInput" name="subProductPriceInput" class="form-control" placeholder="Enter product price" value="{subproductprice}">
+        </div>
+        <div class="form-group">
+            <label for="subProductDescriptionInput">Sub product description</label>
+            <textarea id="subProductDescriptionInput" name="subProductDescriptionInput" class="form-control" placeholder="Enter sub product description" rows="5">{subproductdescription}</textarea>
+        </div>
+
+        <input type="hidden" name="_csrf" id="_csrf" value="{csrfToken}">
+        <div class="alert" id="alertContainer">
+
+        </div>
+        <button type="button" class="btn btn-primary my-2" onclick="editSubProduct('{requestPath}'); return false;">Edit record</button>
+    </form>
+</div>

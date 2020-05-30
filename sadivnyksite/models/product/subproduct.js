@@ -7,6 +7,14 @@ module.exports = (sequelize, DataTypes) => {
         },
         Sub_Product_Description: DataTypes.TEXT,
         Sub_Product_Code: DataTypes.STRING,
-        Price: DataTypes.DOUBLE
+        Price: DataTypes.DOUBLE,
+        General_Product_ID_FK: {
+            type: DataTypes.INTEGER,
+            references: {
+                model: 'General_Products',
+                key: 'General_Product_ID'
+            },
+            field: 'General_Product_ID_FK'
+        }
     })
 };

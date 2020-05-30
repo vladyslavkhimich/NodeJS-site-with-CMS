@@ -1,0 +1,22 @@
+<div class="container p-3 d-flex flex-column">
+    <h2>Categories</h2>
+    <div class="d-flex py-2 align-items-center">
+        <a href="/admin/panel/resources/category/{pageNumber}" role="button" class="btn btn-outline-dark mx-2">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <h3 class="d-inline-block">
+            Edit category
+        </h3>
+    </div>
+    <form class="white-background p-4" method="post">
+        <div class="form-group">
+            <label for="categoryInput">Category</label>
+            <input type="text" id="categoryInput" name="category" class="form-control" placeholder="Enter category" value="{category}">
+        </div>
+        <input type="hidden" name="_csrf" id="_csrf" value="{csrfToken}">
+        <div class="alert" id="alertContainer">
+
+        </div>
+        <button type="submit" class="btn btn-primary my-2" onclick="editCategory('{requestPath}'); return false;">Edit record</button>
+    </form>
+</div>

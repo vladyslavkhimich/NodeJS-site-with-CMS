@@ -17,7 +17,9 @@ hr {
   background-color: white; }
 
 table {
-  background: white; }
+  background: white;
+  table-layout: fixed;
+  width: 100%; }
 
 tr {
   display: table-row; }
@@ -31,5 +33,8 @@ thead {
 td {
   text-overflow: ellipsis;
   word-wrap: break-word; }
+
+.btn-outline-dark:hover {
+  color: white !important; }
 
 /*# sourceMappingURL=adminstyle.css.map */

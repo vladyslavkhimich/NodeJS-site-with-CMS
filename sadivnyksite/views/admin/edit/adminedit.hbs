@@ -1,0 +1,40 @@
+<div class="container p-3 d-flex flex-column">
+    <h2>Admins</h2>
+    <div class="d-flex py-2 align-items-center">
+        <a href="/admin/panel/resources/admin/{pageNumber}" role="button" class="btn btn-outline-dark mx-2">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <h3 class="d-inline-block">
+            Edit admin
+        </h3>
+    </div>
+    <form class="white-background p-4" method="post">
+        <div class="form-group">
+            <label for="loginInput">Login</label>
+            <input type="text" id="loginInput" name="login" class="form-control" placeholder="Enter login" value="{login}">
+        </div>
+        <div class="form-group">
+            <label for="oldPasswordInput">Current password</label>
+            <input type="password" id="oldPasswordInput" name="password" class="form-control" placeholder="Enter current password">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="is-change-password-checkbox" onclick="changePasswordCheckboxClick()">
+            <label for="is-change-password-checkbox" class="form-check-label">
+                Don't change password
+            </label>
+        </div>
+        <div class="form-group">
+            <label for="newPasswordInput">New password</label>
+            <input type="password" id="newPasswordInput" name="password" class="form-control" placeholder="Enter new password">
+        </div>
+        <div class="form-group">
+            <label for="repeatPasswordInput">Repeat password</label>
+            <input type="password" id="repeatPasswordInput" class="form-control" placeholder="Repeat new password">
+        </div>
+        <input type="hidden" name="_csrf" id="_csrf" value="{csrfToken}">
+        <div class="alert" id="alertContainer">
+
+        </div>
+        <button type="submit" class="btn btn-primary my-2" onclick="editAdmin('{requestPath}'); return false;">Edit record</button>
+    </form>
+</div>

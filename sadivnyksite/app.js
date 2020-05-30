@@ -32,7 +32,7 @@ app.engine('hbs', expressHbs(
         helpers: {
             isId: function(key, options) {
                 console.log(key);
-                if (key === 'Admin_ID' || key === 'Category_ID' || key === 'Manufacturer_ID')
+                if (key === 'Admin_ID' || key === 'Category_ID' || key === 'Manufacturer_ID' || key === 'General_Product_ID' || key === 'Sub_Product_ID')
                      return options.fn(this);
                 else
                     return options.inverse(this);

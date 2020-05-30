@@ -11,9 +11,10 @@ const adminPanelController = require('../../controllers/admin/adminpanelcontroll
 //routers
 const resourcesRouter = require('./resourcesrouter');
 const createRouter = require('./createRouter');
+const deleteRouter = require('./deleteRouter');
+const editRouter = require('./editrouter');
 
 const productSequelize = require('../../models/product/productsequelize');
-const admin = require('../../models/admin/adminsequelize');
 
 const adminRouter = express.Router();
 adminRouter.use(csrfProtection);
@@ -28,9 +29,23 @@ adminRouter.post('/signin', passport.authenticate('local.admin', {
     else
         response.sendStatus(403);
 });*/
+
+// Right order of paths
+/*adminRouter.get('/panel/!*', isAdminLogged);
 adminRouter.use('/panel/create', createRouter);
 adminRouter.use('/panel/resources', resourcesRouter);
+adminRouter.use('/panel/delete', deleteRouter);
+adminRouter.use('/panel/edit', editRouter);
 adminRouter.get('/panel', isAdminLogged, adminPanelController.returnAdminPanel);
+adminRouter.get('/', adminSignInController.returnAdminSignInPage);*/
+
+// Order of paths only for developing
+adminRouter.use('/panel/create', createRouter);
+adminRouter.use('/panel/resources', resourcesRouter);
+adminRouter.use('/panel/delete', deleteRouter);
+adminRouter.use('/panel/edit', editRouter);
+//adminRouter.get('/panel/*', isAdminLogged);
+adminRouter.get('/panel', adminPanelController.returnAdminPanel);
 adminRouter.get('/', adminSignInController.returnAdminSignInPage);
 
 function isAdminLogged(request, response, next) {

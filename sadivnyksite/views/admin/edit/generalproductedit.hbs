@@ -1,0 +1,50 @@
+<div class="container p-3 d-flex flex-column">
+    <h2>General product</h2>
+    <div class="d-flex py-2 align-items-center">
+        <a href="/admin/panel/resources/generalproduct/{pageNumber}" role="button" class="btn btn-outline-dark mx-2">
+            <i class="fa fa-arrow-left fa-lg"></i>
+        </a>
+        <h3 class="d-inline-block">
+            Edit general product
+        </h3>
+    </div>
+    <form class="white-background p-4" method="post">
+        <div class="form-group">
+            <label for="generalProductInput">Product name</label>
+            <input type="text" id="generalProductInput" name="name" class="form-control" placeholder="Enter  product name" value="{productName}">
+        </div>
+        <div class="form-group">
+            <label for="productCurrentCategoryInput">Current category</label>
+            <input type="text" id="productCurrentCategoryInput" name="currentCategory" class="form-control" value="{currentCategory}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="categorySelectInput">Product category</label>
+            <select class="form-control" id="categorySelectInput">
+                {categoryOptions}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="productCurrentManufacturerInput">Current manufacturer</label>
+            <input type="text" id="productCurrentManufacturerInput" name="currentManufacturer" class="form-control" value="{currentManufacturer}" readonly>
+        </div>
+        <div class="form-group">
+            <label for="manufacturerSelectInput">Product manufacturer</label>
+            <select class="form-control" id="manufacturerSelectInput">
+                {manufacturerOptions}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="generalProductImageInput">Product image url</label>
+            <input type="text" id="generalProductImageInput" name="image" class="form-control" placeholder="Paste image url" value="{productImage}">
+        </div>
+        <div class="form-group">
+            <label for="productDescriptionInput">Product description</label>
+            <textarea id="productDescriptionInput" name="productDescriptionInput" class="form-control" placeholder="Enter product description" rows="5">{productDescription}</textarea>
+        </div>
+        <input type="hidden" name="_csrf" id="_csrf" value="{csrfToken}">
+        <div class="alert" id="alertContainer">
+
+        </div>
+        <button type="submit" class="btn btn-primary my-2" onclick="editGeneralProduct('{requestPath}'); return false;">Edit record</button>
+    </form>
+</div>
