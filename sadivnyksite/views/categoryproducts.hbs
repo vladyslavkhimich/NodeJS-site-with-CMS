@@ -1,0 +1,56 @@
+<div class="main-content wrapper">
+    <nav id="sidebar" class="shadow">
+        <a href="javascript:void(0)" class="closebtn px-3 py-2" onclick="closeNav()">&times;</a>
+        <div class="container px-3">
+            <div class="sidebar-header">
+                <h3>Фільтри</h3>
+            </div>
+            <form class="list-unstyled components">
+                <p>Виробник</p>
+                {{#each manufacturers}}
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input manufacturer-checkbox" id="manufacturer-checkbox-{{@index}}" value="{{this.Manufacturer_ID}}">
+                        <label for="manufacturer-checkbox-{{@index}}" class="form-check-label">{{this.Manufacturer_Name}}</label>
+                    </div>
+                {{/each}}
+                <p>Ціна</p>
+                <div>
+                    <input type="text" id="priceSlider" name="priceRange">
+                </div>
+                <button type="submit" onclick="filterProducts('{{filterURL}}'); return false;" class="btn main-button my-3">Відфільтрувати</button>
+            </form>
+        </div>
+    </nav>
+<div class="my-5 px-3 text-center category-name-block">
+    <h1>{{categoryName}}</h1>
+    <div class="green-line"></div>
+</div>
+    <div class="container-fluid px-5 my-2">
+        <button type="button" id="sidebarCollapse" class="btn default-button" onclick="openNav()">
+            <i class="fa fa-filter"></i>
+            <span>Фільтри</span>
+        </button>
+    </div>
+<div id="products-container" class="px-lg-5 px-2">
+{{#each products}}
+    <div class="row display-flex">
+        {{#each this}}
+            <a href="/product/{{General_Product_ID}}" class="thumbnail-link">
+        <div class="col-sm-6 col-md-3 shadow thumbnail-helper my-2">
+            <div class="img-thumbnail mx-2">
+                <div class="text-center">
+                    <img src="{{General_Product_Image_Path}}" alt="Зображення товару" class="img-responsive">
+                </div>
+                <div class="caption py-3 px-5">
+                    <h5>{{Product_Name}}</h5>
+                    <div>&#8372; <span class="price-span">{{minimumPrice}}</span></div>
+                    <a href="/product/{{General_Product_ID}}" class="btn default-button" role="button">Детальніше</a>
+                </div>
+            </div>
+        </div>
+            </a>
+        {{/each}}
+    </div>
+{{/each}}
+</div>
+</div>

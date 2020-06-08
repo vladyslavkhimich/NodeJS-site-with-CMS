@@ -9,6 +9,7 @@
                 <a href="/admin/panel/resources/{{this.link}}/1" class="list-group-item list-group-item-action">{{this.tableName}}</a>
             {{/each}}
         </div>
+        <a href="/admin/panel/logout" role="button" class="btn btn-primary px-3 my-4 w-100">Logout</a>
     </div>
     <div class="gray-background container col-lg-9 col-11">
         {{#if isCreation}}
@@ -34,8 +35,8 @@
                                 {{@key}}
                             </td>
                         {{/each}}
-                        <td>Edit</td>
-                        <td>Delete</td>
+                        <td id="thedit">Edit</td>
+                        <td id="thdelete">Delete</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -46,10 +47,10 @@
                             {{/each}}
                             {{#each this}}
                                 {{#isId @key}}
-                                    <td>
+                                    <td headers="thedit">
                                         <a role="button" class="btn btn-outline-dark mx-1" href="/admin/panel/edit/{{../../tableNameForLink}}/{{this}}" ><i class="fa fa-pencil fa-lg"></i></a>
                                     </td>
-                                    <td>
+                                    <td headers="thdelete">
                                         <a role="button" class="btn btn-outline-dark mx-1" onclick="deleteRecord('/admin/panel/delete/{{../../tableNameForLink}}/{{this}}')"><i class="fa fa-trash-o fa-lg"></i></a>
                                     </td>
                                 {{/isId}}

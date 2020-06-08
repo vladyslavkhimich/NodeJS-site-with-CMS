@@ -1,3 +1,70 @@
-<div class="main-content">
-    <h1>Home page</h1>
+<div class="main-content py-4">
+    <div class="slider-catalog-container  flex-lg-row flex-column align-items-center align-items-lg-start justify-content-lg-center d-flex ">
+
+
+    <div class="col-11 col-xl-3 col-lg-4 main-page-menu shadow mb-2 p-0">
+        <div class="main-background-color navbar-brand w-100 p-2 mb-2 px-4">
+            Каталог
+        </div>
+        {{#each categories}}
+            <a class="dropdown-item" href="/categories/{{this.Category_ID}}">{{this.Category_Name}}</a>
+            <div class="dropdown-divider"></div>
+        {{/each}}
+
+    </div>
+    <div class="col-12 col-lg-6">
+    <div id="carouselExampleIndicators" class="carousel slide col-center" data-ride="carousel">
+        <ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2014/07/05/08/30/lawnmower-384589_960_720.jpg" alt="Second slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2017/07/19/08/50/gardening-2518377_960_720.jpg" alt="Third slide">
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" src="https://cdn.pixabay.com/photo/2020/05/21/22/08/watering-can-5202988_960_720.jpg" alt="Fourth slide">
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+    </div>
+    </div>
+    <div class="my-5 px-3 text-center category-name-block">
+        <h1>Останні товари</h1>
+        <div class="green-line"></div>
+    </div>
+    <div id="products-container" class="px-lg-5 px-2">
+        {{#each products}}
+            <div class="row display-flex">
+                {{#each this}}
+                    <a href="/product/{{General_Product_ID}}" class="thumbnail-link">
+                        <div class="col-sm-6 col-md-3 shadow thumbnail-helper my-2">
+                            <div class="img-thumbnail mx-2">
+                                <div class="text-center">
+                                    <img src="{{General_Product_Image_Path}}" alt="Зображення товару" class="img-responsive">
+                                </div>
+                                <div class="caption py-3 px-5">
+                                    <h5>{{Product_Name}}</h5>
+                                    <div>&#8372; <span class="price-span">{{minimumPrice}}</span></div>
+                                    <a href="/product/{{General_Product_ID}}" class="btn default-button" role="button">Детальніше</a>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                {{/each}}
+            </div>
+        {{/each}}
+    </div>
 </div>

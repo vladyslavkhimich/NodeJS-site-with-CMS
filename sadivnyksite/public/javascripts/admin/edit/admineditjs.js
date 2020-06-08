@@ -16,7 +16,7 @@ function editAdmin(editURL) {
             alertContainer.showErrorAlertContainer('Password must be at least 8 characters long');
         else if (newPasswordInput.value !== repeatPasswordInput.value)
             alertContainer.showErrorAlertContainer('Passwords are not equal');
-        else if (newPasswordInput.value === oldPasswordInput)
+        else if (newPasswordInput.value === oldPasswordInput.value)
             alertContainer.showErrorAlertContainer('Old and new password are equal');
         else {
             fetch(editURL, {

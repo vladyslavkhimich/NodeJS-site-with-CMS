@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-fixed-top main-background-color shadow">
+<nav class="navbar navbar-expand-lg fixed-top main-background-color shadow">
     <a class="navbar-brand brand-font" href="/">САДІВНИК</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fa fa-list-ul"></i>
@@ -11,35 +11,133 @@
                     Каталог
                 </a>
                 <div class="dropdown-menu dropdown-menu-left" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
+                    {{#each categories}}
+                        <a class="dropdown-item" href="/categories/{{this.Category_ID}}">{{this.Category_Name}}</a>
+                        <div class="dropdown-divider"></div>
+                    {{/each}}
                 </div>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0 col-lg-5 col-sm-12 px-sm-0">
-            <input class="form-control col-sm-10" type="search" placeholder="Пошук..." aria-label="Search">
+        <form class="form-inline my-2 my-lg-0 col-lg-5 col-sm-12 px-sm-0" method="get" action="/search">
+            <input class="form-control col-sm-10" type="search" name="searchText" placeholder="Пошук..." aria-label="Search">
             <button class="btn default-button my-2 my-sm-0 col-sm-2" type="submit">
                 <i class="fa fa-search"></i>
             </button>
         </form>
-        <button class="btn default-button col-lg-1 col-sm-12 px-1 mx-lg-3 cart-button">
+        <a role="button" href="/cart" class="btn default-button col-lg-1 col-sm-12 px-1 mx-lg-3 cart-button">
             <i class="fa fa-shopping-cart">  Кошик</i>
-        </button>
+            <span class="badge" id="totalQtySpan">{{session.cart.totalQty}}</span>
+        </a>
         <ul class="navbar-nav">
             <li class="nav-item dropdown catalog">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownAccount" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="fa fa-user">
-                        <span id="account-text">  Ваш аккаунт</span>
+                        <span id="account-text">  Кабінет</span>
                     </i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right" id="account-dropdown" aria-labelledby="navbarDropdownAccount">
-                    <a class="dropdown-item" href="#">Особистий кабінет</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Вийти</a>
+                    {{#if login}}
+                        <a class="dropdown-item" href="/user/profile">Особистий кабінет</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/user/logout">Вихід</a>
+                    {{else}}
+                        <button class="dropdown-item" data-toggle="modal" data-target="#loginModal">Вхід</button>
+                        <div class="dropdown-divider"></div>
+                        <button class="dropdown-item" data-toggle="modal" data-target="#registerModal">Реєстрація</button>
+                    {{/if}}
                 </div>
             </li>
         </ul>
     </div>
 </nav>
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="modalHeader" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalHeader">Реєстрація</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body pt-0">
+                    <div class="text-center" style="color: #757575;">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="nameInput">Ім'я</label>
+                                    <input type="text" id="nameInput" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col mt-0">
+                                    <label for="emailInput">Електронна пошта</label>
+                                    <input type="email" id="emailInput" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="passwordInput">Пароль</label>
+                                    <input type="password" id="passwordInput" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                                    <small class="form-text text-muted mb-4">
+                                        Щонайменше 8 символів
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" name="_csrf" id="_csrf" value="{{csrfToken}}">
+                        <button class="dropdown-item" id="register-login">У мене є аккаунт</button>
+                        <div id="signUpAlertContainer" class="alert my-2">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn main-button" onclick="createNewUser()">Зареєструватися</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="modalHeader" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalHeader">Вхід</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="card-body pt-0">
+                    <form class="text-center" style="color: #757575;" action="/user/signin" method="POST">
+                        <div class="form-row">
+                            <div class="col">
+                                <div class="md-form mt-0">
+                                    <label for="emailLoginInput">Електронна пошта</label>
+                                    <input type="email" id="emailLoginInput" name="email" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md-form">
+                            <label for="passwordLoginInput">Пароль</label>
+                            <input type="password" id="passwordLoginInput" name="password" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock">
+                        </div>
+                        <input type="hidden" name="_csrf" id="_csrf" value="{{csrfToken}}">
+                        <div id="signUpAlertContainer" class="alert my-2">
+                        </div>
+                        <button type="button" class="dropdown-item" id="login-register">У мене немає аккаунту</button>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn main-button">Ввійти</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

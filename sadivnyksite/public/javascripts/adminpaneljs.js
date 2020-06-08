@@ -10,7 +10,7 @@ alertContainer.makeAlertContainerInvisible();
 if (previousPaginationLink) {
     let currentPageNumber = parseInt(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
     if (currentPageNumber > 1)
-        previousPaginationLink.href = '/admin/panel/resources/' + tableNameSpan.innerText + '/' + currentPageNumber - 1;
+        previousPaginationLink.href = '/admin/panel/resources/' + tableNameSpan.innerText + '/' + parseInt(currentPageNumber - 1).toString();
     else
         previousPaginationLinkContainer.classList.add('disabled');
 }
@@ -18,7 +18,7 @@ if (previousPaginationLink) {
 if(nextPaginationLink) {
     let currentPageNumber = parseInt(window.location.href.substring(window.location.href.lastIndexOf('/') + 1));
     if (currentPageNumber !== parseInt(maxPageSpan.innerText))
-        nextPaginationLink.href = '/admin/panel/resources/' + tableNameSpan.innerText;
+        nextPaginationLink.href = '/admin/panel/resources/' + tableNameSpan.innerText + '/' + parseInt(currentPageNumber + 1).toString();
     else
         nextPaginationLinkContainer.classList.add('disabled');
 }

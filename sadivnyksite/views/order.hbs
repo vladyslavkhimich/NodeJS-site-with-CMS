@@ -1,0 +1,95 @@
+<div class="main-content d-flex justify-content-center">
+    <div class="col-lg-6 col-11 shadow p-lg-5 p-md-3 px-3 py-3">
+        <h1 class="header-font px-1 py-4 header-font">Оформлення замовлення</h1>
+        <hr/>
+        <div class="d-flex justify-content-between">
+            <h3 class="header-font d-flex align-items-center"><i class="fa fa-shopping-cart fa-lg mr-3"></i>    Товари</h3>
+        </div>
+        <div class="px-3 m-2">
+            <ul class="list-group" id="products-list">
+                {{#each products}}
+                    <li class="list-group-item d-flex justify-content-between flex-column flex-md-row">
+                        <span style="font-weight: bold">{{this.productName}}</span>
+                        <div class="mr-3 d-inline">
+                            Кількість: <span class="qty-span mx-2">{{this.qty}}</span>
+                        </div>
+                        <span style="font-weight: bold">₴{{this.price}}</span>
+                    </li>
+                {{/each}}
+            </ul>
+        </div>
+            <hr/>
+    <div class="d-flex justify-content-between">
+        <h3 class="header-font d-flex align-items-center"><i class="fa fa-user-circle-o fa-lg mr-3"></i>    Контактні дані</h3>
+    </div>
+        <form id="orderForm">
+
+    <div class="form-group">
+        <label for="userNameInput">Ім'я отримувача</label>
+        <input type="text" class="form-control" id="userNameInput" placeholder="Введіть ім'я" value="{{user.Name}}" required pattern="^([^Ьа-я][а-яіїщґ]+[-']?(?:[А-Яа-яіїщґ]+)*)$">
+        <small>Українською у формі напр.: Олег</small>
+    </div>
+    <div class="form-group">
+        <label for="lastNameInput">Прізвище отримувача</label>
+        <input type="text" class="form-control" id="lastNameInput" placeholder="Введіть прізвище" value="{{user.Last_Name}}" required pattern="^([^Ьа-я][а-яіїщґ]+[-']?(?:[А-Яа-яіїщґ]+)*)$">
+        <small>Українською у формі напр.: Петров</small>
+    </div>
+    <label for="phoneInput">Номер телефону отримувача</label>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="phone-addon">+380</span>
+        </div>
+        <input type="text" class="form-control" id="phoneInput"  placeholder="Введіть номер телефону" value="{{user.Mobile_Phone_Number}}" data-mask="(00)-000-00-00" required>
+    </div>
+    <hr/>
+    <div class="d-flex justify-content-between">
+        <h3 class="header-font d-flex align-items-center"><i class="fa fa-home fa-lg mr-3"></i>    Адреса</h3>
+    </div>
+    <div class="form-group">
+        <label for="cityInput">Місто</label>
+            <input id="cityInput" class="form-control" placeholder="Місто для доставки" type="text" required pattern="^([^Ьа-я][а-яіїщґ]+[-]?(?:[А-Яа-яіїщґ]+)*)$"/>
+    </div>
+    <div class="form-group">
+        <label for="areaInput">Область</label>
+        <input id="areaInput" class="form-control" placeholder="Область для доставки" type="text" required pattern="^([^Ьа-я][а-яіїщґ]+[-]?(?:[А-Яа-яіїщґ]+)*)$" />
+    </div>
+    <div class="form-group">
+        <label for="streetInput">Вулиця</label>
+            <input id="streetInput" class="form-control" placeholder="Вулиця для доставки" type="text"  pattern="^([^Ь][а-яіїщґ]+([-'. ]?(?:[А-Яа-яіїщґ]+))*)$"/>
+        <small>Українською допускається напр.: пров.Панаса Саксаганського(без пробілу після .)</small>
+    </div>
+
+    <div class="form-group">
+        <label for="buildingNumberInput">Номер будинку</label>
+            <input id="buildingNumberInput" class="form-control" placeholder="Будинок для доставки" type="text" required pattern="^([\d]+[\/]?[\d]?[А-Яа-яA-Za-z]?){1}$"/>
+    </div>
+    <div class="form-group">
+        <label for="apartmentNumberInput">Номер квартири</label>
+            <input id="apartmentNumberInput" class="form-control" placeholder="Номер квартири для доставки" type="text" pattern="^([\d]+[\/]?[\d]?[А-Яа-яA-Za-z]?){1}$"/>
+    </div>
+            {{> alertcontainer}}
+            <div class="d-flex justify-content-between">
+                <strong class="header-font">Сума: <span id="totalPriceSpan">{{totalPrice}}</span> грн.</strong>
+                <button type="submit" class="btn main-button" onclick="tryToMakeOrder(); return false;">Замовити</button>
+            </div>
+    </form>
+    </div>
+</div>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Замовлення прийнято!</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Ваше замовлення прийнято до обробки
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn main-button" data-dismiss="modal">Добре!</button>
+        </div>
+    </div>
+</div>
+</div>

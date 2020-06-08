@@ -1,0 +1,126 @@
+<div class="main-content d-flex justify-content-center">
+    <div class="col-lg-6 col-11 shadow p-lg-5 p-md-3 p-0 py-3">
+        <h1 class="header-font px-1 py-4 header-font">Інформація про Вас</h1>
+        <hr/>
+        <div class="px-3 m-2 mb-5 bordered-div">
+            <div class="d-flex justify-content-between">
+                <h3 class="header-font d-flex align-items-center"><i class="fa fa-user-circle-o fa-lg mr-3"></i>    Особисті дані</h3>
+                <button class="default-link link-line-height" id="editPersonalDataButton" onclick="enablePersonalDataForm()"><i class="fa fa-edit fa-2x"></i>Редагувати</button>
+            </div>
+            <form id="editPersonalDataForm">
+            <div class="form-group">
+                <label for="userNameInput">Ім'я</label>
+                <input type="text" class="form-control" id="userNameInput" placeholder="Введіть своє ім'я" value="{{user.Name}}">
+            </div>
+                <div class="form-group">
+                    <label for="lastNameInput">Прізвище</label>
+                    <input type="text" class="form-control" id="lastNameInput" placeholder="Введіть своє прізвище" value="{{user.Last_Name}}">
+                </div>
+                <div class="form-group">
+                    <label for="surnameInput">По-батькові</label>
+                    <input type="text" class="form-control" id="surnameInput" placeholder="Введіть своє по-батькові" value="{{user.Surname}}">
+                </div>
+                <div class="form-group date" >
+                    <label for="dateInput">Дата народження</label>
+                    <input type="text" data-provide="datepicker" class="form-control" id="dateInput" data-date-format="dd.mm.yyyy" data-date-end-date="0d" placeholder="Оберіть дату свого народження">
+                </div>
+                <div class="form-group">
+                    <label for="sexInput">Стать</label>
+                    <select class="form-control" id="sexInput">
+                        <option value="1">Чоловіча</option>
+                        <option value="0">Жіноча</option>
+                    </select>
+                </div>
+                <div id="personalDataAlertContainer" class="alert my-2">
+
+                </div>
+                <button type="submit" class="btn main-button" onclick="changePersonalData(); return false;">Змінити</button>
+                <button type="button" class="btn default-button" onclick="cancelChangingPersonalData()">Скасувати</button>
+            </form>
+            <span id="userBirthDateSpan" style="display: none">{{user.Birth_Date}}</span>
+            <span id="userSexSpan" style="display: none">{{user.Sex}}</span>
+        </div>
+        <hr/>
+        <div class="px-3 m-2 my-5 bordered-div">
+            <div class="d-flex justify-content-between">
+                <h3 class="header-font d-flex align-items-center"><i class="fa fa-phone fa-lg mr-3"></i>    Контакти</h3>
+                <button class="default-link link-line-height" id="editContactsDataButton" onclick="enableContactsDataForm()"><i class="fa fa-edit fa-2x"></i>Редагувати</button>
+            </div>
+                <form id="editContactsDataForm">
+                    <label for="phoneInput">Номер телефону</label>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="phone-addon">+380</span>
+                        </div>
+                        <input type="text" class="form-control" id="phoneInput"  placeholder="Введіть свій номер телефону" value="{{user.Mobile_Phone_Number}}" data-mask="(00)-000-00-00">
+                    </div>
+                    <div id="contactsDataAlertContainer" class="alert my-2">
+
+                    </div>
+                    <button type="submit" class="btn main-button" onclick="changeContactsData(); return false;">Змінити</button>
+                    <button type="button" class="btn default-button" onclick="cancelChangingContactsData()">Скасувати</button>
+                </form>
+        </div>
+        <hr/>
+        <div class="px-3 m-2 my-5 bordered-div">
+            <div class="d-flex justify-content-between">
+                <h3 class="header-font d-flex align-items-center"><i class="fa fa-lock fa-lg mr-3"></i>    Пароль</h3>
+                <button class="default-link link-line-height" id="editPasswordDataButton" onclick="enablePasswordDataForm()"><i class="fa fa-edit fa-2x"></i>Редагувати</button>
+            </div>
+            <form id="editPasswordDataForm">
+                <div class="form-group">
+                    <label for="oldPasswordInput">Старий пароль</label>
+                    <input type="password" class="form-control" id="oldPasswordInput" placeholder="Введіть старий пароль">
+                </div>
+                <div class="form-group">
+                    <label for="newPasswordInput">Новий пароль</label>
+                    <input type="password" class="form-control" id="newPasswordInput" placeholder="Введіть новий пароль">
+                </div>
+                <div class="form-group">
+                    <label for="repeatNewPasswordInput">Повторіть новий пароль</label>
+                    <input type="password" class="form-control" id="repeatNewPasswordInput" placeholder="Повторіть новий пароль">
+                </div>
+                <div id="passwordDataAlertContainer" class="alert my-2">
+
+                </div>
+                <button type="submit" class="btn main-button" onclick="changePasswordData(); return false;">Змінити</button>
+                <button type="button" class="btn default-button" onclick="cancelChangingPasswordData()">Скасувати</button>
+            </form>
+        </div>
+        <hr>
+        <div class="px-3 m-2 my-5 bordered-div">
+            <div class="d-flex justify-content-between">
+                <h3 class="header-font d-flex align-items-center"><i class="fa fa-shopping-cart fa-lg mr-3"></i>    Замовлення</h3>
+            </div>
+            {{#if orders}}
+                {{#each orders}}
+                <div class="panel panel-default my-3 p-3 border rounded">
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            {{#each this.products}}
+                            <li class="list-group-item d-flex justify-content-between">
+                                <span>{{this.productName}}</span>
+                                <span class="badge">Кількість: {{this.qty}}</span>
+                            </li>
+                            {{/each}}
+                        </ul>
+                    </div>
+                    <div class="panel-footer">
+                        <div>Отримувач: {{this.lastName}} {{this.name}}</div>
+                        <div>Дата замовлення: {{this.orderDate}}</div>
+                        <div>Загальна кількість: {{this.totalQty}}</div>
+                        <div><strong>Сума: {{this.totalPrice}} грн.</strong></div>
+                    </div>
+                </div>
+                {{/each}}
+            {{else}}
+                <div class="row">
+                    <div class="my-5 mx-3">
+                        <h2 class="header-font">Ви ще не здійснювали замовлень! Розпочніть покупки.</h2>
+                    </div>
+                </div>
+            {{/if}}
+
+        </div>
+    </div>
+</div>

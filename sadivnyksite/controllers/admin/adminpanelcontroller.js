@@ -192,7 +192,8 @@ exports.returnAdminPanelGeneralProductsEntities = function (request, response, n
 exports.returnAdminPanelSubProductEntities = function (request, response, newPageNumber) {
   SubProduct.findAll({raw: true,
       offset: currentPageIndex * numberOfRecordsOnPage,
-      limit: numberOfRecordsOnPage}).then(subProducts => {
+      limit: numberOfRecordsOnPage,
+      attributes: {exclude: ['createdAt', 'updatedAt']}}).then(subProducts => {
         let counter = 0;
         if (subProducts.length === 0) {
             subProductsEntities = subProducts;
@@ -564,3 +565,13 @@ function getHtmlFromFile(filePath) {
     let template = Handlebars.compile(source);
     return template(fileHtml);
 }
+
+exports.logoutAdmin = function (request, response) {
+    if (request.user && 'Admin_ID' in request.user) {
+        request.logout();
+        response.redirect('/');
+    }
+    else {
+        response.redirect('/admin')
+    }
+};

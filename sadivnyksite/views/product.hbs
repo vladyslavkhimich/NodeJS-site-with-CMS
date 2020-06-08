@@ -1,0 +1,44 @@
+<div class="main-content d-flex justify-content-center">
+    <div class="col-lg-6 col-11 shadow p-lg-5 p-md-3 p-0 py-3">
+        <div class="px-1 mb-3">
+            <button class="default-link link-line-height" onclick="window.history.back()">
+                <i class="fa fa-arrow-left fa-2x"></i>
+                <div class="icon-span-text">Назад</div>
+            </button>
+        </div>
+        <h1 class="header-font px-1">{{product.Product_Name}}</h1>
+        <div class="text-center">
+        <img src="{{product.General_Product_Image_Path}}" alt="Зображення товару" class="my-4 product-image">
+        </div>
+        <div class="pt-3 px-3 main-font">
+            Виробник: {{manufacturer.Manufacturer_Name}}
+            <img src="{{manufacturer.Manufacturer_Logo_Path}}" alt="Лого виробника" class="ml-3" height="48px">
+        </div>
+        <hr/>
+        <div class="px-3 main-font">
+            Опис: {{product.General_Product_Description}}
+        </div>
+        <hr/>
+        {{> alertcontainer}}
+        <div class="mt-3 p-1 main-font">
+            <table class="sub-products-table">
+                <thead>
+                <tr>
+                    <td>Артикул</td>
+                    <td>Опис/Розмір</td>
+                    <td>Ціна</td>
+                    <td>Купити</td>
+                </tr>
+                </thead>
+                {{#each subProducts}}
+                    <tr>
+                        <td>{{this.Sub_Product_Code}}</td>
+                        <td>{{this.Sub_Product_Description}}</td>
+                        <td>{{this.Price}}</td>
+                        <td><button role="button" onclick="addToCart('/addtocart/{{this.Sub_Product_ID}}')" class="btn main-button main-font">Купити</button></td>
+                    </tr>
+                {{/each}}
+            </table>
+        </div>
+    </div>
+</div>
