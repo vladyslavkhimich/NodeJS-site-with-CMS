@@ -55,12 +55,12 @@ function filterProducts(filterURL) {
             else {
                 let chunkSize = 4;
                 let generalProductsChunks = [];
-                let productsHtml;
+                let productsHtml = '';
                 for (let i = 0; i < jsonObjects.length; i+=chunkSize) {
                     generalProductsChunks.push(jsonObjects.slice(i, i + chunkSize));
                 }
                 generalProductsChunks.forEach(generalProductChunk => {
-                    productsHtml = `<div class="row display-flex">`;
+                    productsHtml += `<div class="row display-flex">`;
                     generalProductChunk.forEach(generalProduct => {
                         productsHtml += `<a href="/product/${generalProduct.General_Product_ID}" class="thumbnail-link">
 <div class="col-sm-6 col-md-3 shadow thumbnail-helper my-2">
