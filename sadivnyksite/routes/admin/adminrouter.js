@@ -22,13 +22,6 @@ adminRouter.post('/signin', passport.authenticate('local.admin', {
     successRedirect: '/admin/panel',
     failureRedirect: '/admin'
 }, ));
-/*adminRouter.use('/!*', function(request, response, next) {
-    console.log('Panel Middleware');
-    if (request.user)
-        next();
-    else
-        response.sendStatus(403);
-});*/
 
 // Right order of paths
 adminRouter.get('/panel/*', isAdminLogged);

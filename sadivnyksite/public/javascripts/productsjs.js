@@ -71,7 +71,7 @@ function filterProducts(filterURL) {
                 <div class="caption py-3 px-5">
                     <h5>${generalProduct.Product_Name}</h5>
                     <div>&#8372; ${generalProduct.minimumPrice}</div>
-                    <p> <a href="/product/${generalProduct.General_Product_ID}" class="btn default-button" role="button">Детальніше</a></p>
+                    <a href="/product/${generalProduct.General_Product_ID}" class="btn default-button" role="button">Детальніше</a>
                 </div>
             </div>
         </div>

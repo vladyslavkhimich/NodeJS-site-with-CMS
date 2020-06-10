@@ -44,11 +44,11 @@ exports.returnAdminPanel = function(request, response) {
 };
 
 exports.returnAdminPanelAdminEntities = function(request, response, newPageNumber) {
+    currentPageIndex = newPageNumber - 1;
     Admin.findAll({raw: true, attributes: {exclude: ['Password']}, offset: currentPageIndex * numberOfRecordsOnPage, limit: numberOfRecordsOnPage}).then(admins => {
         adminsEntities = admins;
         Admin.count().then(recordsCount => {
             adminEntitiesCount = recordsCount;
-            currentPageIndex = newPageNumber - 1;
             response.render('admin/adminpanel', {
                 title: 'Admin panel - Admins',
                 layout: 'adminlayout',
@@ -68,11 +68,11 @@ exports.returnAdminPanelAdminEntities = function(request, response, newPageNumbe
 };
 
 exports.returnAdminPanelCategoryEntities = function(request, response, newPageNumber) {
+    currentPageIndex = newPageNumber - 1;
     Category.findAll({raw: true, offset: currentPageIndex * numberOfRecordsOnPage, limit: numberOfRecordsOnPage}).then(categories => {
         categoryEntities = categories;
             Category.count().then(recordsCount => {
                 categoryEntitiesCount = recordsCount;
-                currentPageIndex = newPageNumber - 1;
                 response.render('admin/adminpanel', {
                     title: 'Admin panel - Category',
                     layout: 'adminlayout',
@@ -95,11 +95,11 @@ exports.returnAdminPanelCategoryEntities = function(request, response, newPageNu
 };
 
 exports.returnAdminPanelManufacturerEntities = function(request, response, newPageNumber) {
+    currentPageIndex = newPageNumber - 1;
     Manufacturer.findAll({raw: true, offset: currentPageIndex * numberOfRecordsOnPage, limit: numberOfRecordsOnPage}).then(manufacturers => {
         manufacturerEntities = manufacturers;
         Manufacturer.count().then(recordsCount => {
             manufacturerEntitiesCount = recordsCount;
-            currentPageIndex = newPageNumber - 1;
             response.render('admin/adminpanel', {
                 title: 'Admin panel - Manufacturer',
                 layout: 'adminlayout',
@@ -121,6 +121,7 @@ exports.returnAdminPanelManufacturerEntities = function(request, response, newPa
 };
 
 exports.returnAdminPanelGeneralProductsEntities = function (request, response, newPageNumber) {
+    currentPageIndex = newPageNumber - 1;
     GeneralProduct.findAll({raw: true,
         offset: currentPageIndex * numberOfRecordsOnPage,
         limit: numberOfRecordsOnPage,
@@ -165,7 +166,6 @@ exports.returnAdminPanelGeneralProductsEntities = function (request, response, n
                 if (counter === generalProducts.length) {
                     generalProductsEntities = generalProducts;
                     GeneralProduct.count().then(recordsCount => {
-                            currentPageIndex = newPageNumber - 1;
                             response.render('admin/adminpanel', {
                                 title: 'Admin panel - General product',
                                 layout: 'adminlayout',
@@ -190,6 +190,7 @@ exports.returnAdminPanelGeneralProductsEntities = function (request, response, n
 };
 
 exports.returnAdminPanelSubProductEntities = function (request, response, newPageNumber) {
+    currentPageIndex = newPageNumber - 1;
   SubProduct.findAll({raw: true,
       offset: currentPageIndex * numberOfRecordsOnPage,
       limit: numberOfRecordsOnPage,
@@ -206,8 +207,8 @@ exports.returnAdminPanelSubProductEntities = function (request, response, newPag
                     tableName: 'Sub products',
                     tableNameForLink: 'subproduct',
                     totalRecords: recordsCount,
-                    object: subProductsEntities[0],
-                    entities: subProductsEntities,
+                    object: subProducts[0],
+                    entities: subProducts,
                     numberOfPages: calculateNumberOfPagesForPanel(recordsCount),
                     maxPage: pagesNumbers[pagesNumbers.length - 1],
                     isRightSideOfPanelVisible: 'true',
@@ -223,7 +224,6 @@ exports.returnAdminPanelSubProductEntities = function (request, response, newPag
                     if (counter === subProducts.length) {
                         subProductsEntities = subProducts;
                         SubProduct.count().then(recordsCount => {
-                            currentPageIndex = newPageNumber - 1;
                             response.render('admin/adminpanel', {
                                 title: 'Admin panel - Sub product',
                                 layout: 'adminlayout',
@@ -231,8 +231,8 @@ exports.returnAdminPanelSubProductEntities = function (request, response, newPag
                                 tableName: 'Sub products',
                                 tableNameForLink: 'subproduct',
                                 totalRecords: recordsCount,
-                                object: subProductsEntities[0],
-                                entities: subProductsEntities,
+                                object: subProducts[0],
+                                entities: subProducts,
                                 numberOfPages: calculateNumberOfPagesForPanel(recordsCount),
                                 maxPage: pagesNumbers[pagesNumbers.length - 1],
                                 isRightSideOfPanelVisible: 'true',

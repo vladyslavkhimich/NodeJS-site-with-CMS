@@ -1,6 +1,5 @@
 const { sequelize, Sequelize } = require('../models/sequelize');
 
-const Category = require('../models/product/category')(Sequelize, sequelize);
 const Manufacturer = require('../models/product/manufacturer')(Sequelize, sequelize);
 const GeneralProduct = require('../models/product/generalproduct')(Sequelize, sequelize);
 const SubProduct = require('../models/product/subproduct')(Sequelize, sequelize);

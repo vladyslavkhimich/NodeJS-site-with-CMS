@@ -46,7 +46,7 @@ passport.use('local.admin', new LocalStrategy({
     passwordField: 'Password',
     passReqToCallback: true
 }, function(req, Login, Password, done) {
-    req.usedStrategy = 'local.admin';
+    //req.usedStrategy = 'local.admin';
     Admin.findOne({where: {Login: Login}}).then(admin => {
         if (!admin)
             return done(null, false, {message: 'No such login'});
@@ -64,7 +64,7 @@ passport.use('local.user', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, function (req, email, password, done) {
-    req.usedStrategy = 'local.user';
+    //req.usedStrategy = 'local.user';
     User.findOne({where: {Email: email}}).then(user => {
         if (!user)
             return done(null, false, {message: 'No such email'});

@@ -9,16 +9,16 @@ module.exports = function Cart(oldCart) {
             storedItem = this.items[Sub_Product_ID] = { item: item, qty: 0, price: item.Price, productName: productName }
         }
         storedItem.qty++;
-        storedItem.price = parseFloat((Math.round((storedItem.item.Price + Number.EPSILON) * 100 * storedItem.qty) / 100).toFixed(2));
+        storedItem.price = +((Math.round((this.items[Sub_Product_ID].item.Price + Number.EPSILON) * 100) / 100 * storedItem.qty).toFixed(2));
         this.totalQty++;
-        this.totalPrice += parseFloat((Math.round((storedItem.item.Price + Number.EPSILON) * 100) / 100).toFixed(2));
+        this.totalPrice = +((this.totalPrice + Math.round((this.items[Sub_Product_ID].item.Price + Number.EPSILON) * 100) / 100).toFixed(2));
     };
 
     this.reduceByOne = function(Sub_Product_ID) {
       this.items[Sub_Product_ID].qty--;
-        this.items[Sub_Product_ID].price -= parseFloat((Math.round((this.items[Sub_Product_ID].item.Price + Number.EPSILON) * 100) / 100).toFixed(2));
+        this.items[Sub_Product_ID].price = +((this.items[Sub_Product_ID].price - Math.round((this.items[Sub_Product_ID].item.Price + Number.EPSILON) * 100) / 100).toFixed(2));
         this.totalQty--;
-        this.totalPrice -= parseFloat((Math.round((this.items[Sub_Product_ID].item.Price + Number.EPSILON) * 100) / 100).toFixed(2));
+        this.totalPrice = +((this.totalPrice - Math.round((this.items[Sub_Product_ID].item.Price + Number.EPSILON) * 100) / 100).toFixed(2));
         if (this.items[Sub_Product_ID].qty <= 0) {
             delete this.items[Sub_Product_ID];
         }
